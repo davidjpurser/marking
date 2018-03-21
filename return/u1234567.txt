@@ -36,48 +36,63 @@ $
 %
 % ------------------------------------------------------------------------------------------
 
+
 % Q1
-# 1 {}{5} CommentOnIterator
+# 1 {5}{5} CommentOnIterator
+### > Testing indentation at end of 1
+### >> Testing indentation at end of 1
 
 
 % Q2
 # 2
-## a {}{5} CommentOnsetComp
-## b {}{15} CommentOnSort
-## c {}{7} CommentOnComplexity
-## d {}{3} CommentOnDemonstration
+## a {4}{5} CommentOnsetComp
+## b {3}{15} CommentOnSort
+## c {5}{7} CommentOnComplexity
+## d {3}{3} CommentOnDemonstration
 
 
 % Q3
 # 3
-## a {}{4} CommentOnImplementation
-## b {}{4} CommentOnComplexity
-## c {}{2} Output is [in]correct
-## d {}{5} CommentOnExplanation
+## a {3}{4} CommentOnImplementation
+## b {3}{4} CommentOnComplexity
+## c {2}{2} Output is [in]correct
+## d {3}{5} CommentOnExplanation
 
 
 % Q4
 # 4
-## a {}{7}
-## b {}{8}
+## a {5}{7} Testing 4a.
+## b {5}{8} Testing 4b.
+### `int i = 0;`{.java}
+### `String s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";`{.java}
+### `System.out.println("Hello World");`{.java}
+### `for(int j = 0; i < 1000; i++)`{.java}
+### >`j += j;`{.java}
+### `while(true != false || false != true)`{.java}
+### >`if(true && !false)`{.java}
+### >>`i *= 2;`{.java}
 
 
 % ------------------------------------------------------------------------------------------
 % For question 5, give a general comment using ###
 % Choose which question by putting x at start of the exclude one
-% ATTENTION: NEED to ENABLE the DONE one by CHANGING the x to #, so either # 5.1 or # 5.2
+% Need to enable the done one with # 5.1 or # 5.2
 % Can give general comment or add comment to any or one of implementation (place after mark)
 % ------------------------------------------------------------------------------------------
 
-x 5.1
-##  Implementation {}{12}
-##  Complexity {}{10}
-##  Description {}{13}
+# 5.1 First General Comment
+### Testing `System.out.println("General after start of 5.1");`{.java}
+##  Implementation {12}{12} Testing 5.1 implementation.
+##  Complexity {8}{10} Testing 5.1 complexity.
+##  Description {12}{13} Testing 5.1 description.
 
-x 5.2
-##  Implementation {}{15}
-##  Complexity {}{10}
-##  Description {}{10}
+
+x 5.2 First General Comment
+### Testing `System.out.println("General after start of 5.2");`{.java}
+##  Implementation {}{15}  Testing 5.2 implementation.
+##  Complexity {}{10} Testing 5.2 complexity.
+##  Description {}{10} Testing 5.2 description.
+### Testing general at end of 5.2.
 
 
 % ------------------------------------------------------------------------------------------
@@ -86,7 +101,7 @@ x 5.2
 % Change description if required
 % ------------------------------------------------------------------------------------------
 
-xP {-5} Bad directory structure
-xP {-5} Bad documentation
+#P {-42} Bad directory structure
+#P {-5} Bad documentation
 xP {-5} One day late
 xP {-10} Two days late
