@@ -83,7 +83,7 @@ x 5.2
 % ------------------------------------------------------------------------------------------
 % Enable penalty by changing to #P
 % Only integers allowed
-$ Change description if required
+% Change description if required
 % ------------------------------------------------------------------------------------------
 
 xP {-5} Bad directory structure
