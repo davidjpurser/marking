@@ -32,7 +32,7 @@ $
 %   For example, the line below will deduct 42 points (note only integers are allowed):
 %       #P {-42} This code hurts my eyes.
 %
-%  -Start lines with x to exclude the question (see 5.2, can swap to 5.1)
+% - Start lines with x to exclude the question (see 5.2, can swap to 5.1)
 %
 % ------------------------------------------------------------------------------------------
 
