@@ -1,0 +1,103 @@
+% ------------------------------------------------------------------------------------------
+%   CS126 Feedback Template
+% ------------------------------------------------------------------------------------------
+%
+% - Start lines with # for question (number of marks is optional, feedback is optional)
+%
+% - Start lines with ## for subquestion (number of marks is required, feedback is optional)
+%
+% - Start lines with % for a code comment like this
+%
+% - Start lines with ### for feedback without a mark
+%   For example:
+%       ### This is wrong.
+%
+% - For java syntax inside use `Insert code here`.{java}.
+% - Note this only works on a single line.
+%   An example of this:
+%       ### See this code: `String str = "Hello World!";`.{java}
+%
+% - For indentation inside ### use '>'
+%   An example of this:
+%       ### No indentation
+%       ### > One indentation
+%       ### >> Two indentation
+%       ### >>> Three indentation
+%
+% - With that you can build a multi-line code block like so:
+%       ### `for(int j = 0; i < 1000; i++)`{.java}
+%       ### > `j += j;`{.java}.
+$
+% - Start lines with #P for a penalty. xP will not include the penalty
+%   For example, the line below will deduct 42 points (note only integers are allowed):
+%       #P {-42} This code hurts my eyes.
+%
+%  -Start lines with x to exclude the question (see 5.2, can swap to 5.1)
+%
+% ------------------------------------------------------------------------------------------
+
+% Q1
+# 1 {5}{5} CommentOnIterator
+### > Testing indentation at end of 1
+### >> Testing indentation at end of 1.
+
+% Q2
+# 2
+## a {4}{5} CommentOnsetComp
+## b {3}{15} CommentOnSort
+## c {5}{7} CommentOnComplexity
+## d {3}{3} CommentOnDemonstration
+
+% Q3
+# 3
+## a {3}{4} CommentOnImplementation
+## b {3}{4} CommentOnComplexity
+## c {2}{2} Output is [in]correct
+## d {3}{5} CommentOnExplanation
+
+% Q4
+# 4
+## a {5}{7} Testing 4a.
+## b {5}{8} Testing 4b.
+### `int i = 0;`{.java}
+### `String s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";`{.java}
+### `System.out.println("Hello World");`{.java}
+### `for(int j = 0; i < 1000; i++)`{.java}
+### >`j += j;`{.java}.
+### `while(True)`{.java}
+### >`i *= 2;`{.java}.
+
+
+
+% ------------------------------------------------------------------------------------------
+% For question 5, give a general comment using ###
+% Choose which question by putting x at start of the exclude one
+% Need to enable the done one with # 5.1 or # 5.2
+% Can give general comment or add comment to any or one of implementation (place after mark)
+% ------------------------------------------------------------------------------------------
+
+# 5.1 GeneralComment
+### Testing `System.out.println("General at start of 5.1");`{.java}
+##  Implementation {12}{12} Testing 5.1 implementation.
+##  Complexity {8}{10} Testing 5.1 complexity.
+##  Description {12}{13} Testing 5.1 description.
+
+
+x 5.2 GeneralComment
+### Testing `System.out.println("General at start of 5.2");`{.java}
+##  Implementation {}{15}  Testing 5.2 implementation.
+##  Complexity {}{10} Testing 5.2 complexity.
+##  Description {}{10} Testing 5.2 description.
+### Testing general at end of 5.2.
+
+
+% ------------------------------------------------------------------------------------------
+% Enable penalty by changing to #P
+% Only integers allowed
+% Change description if required
+% ------------------------------------------------------------------------------------------
+
+#P {-42} Bad directory structure
+xP {-5} Bad documentation
+xP {-5} One day late
+xP {-10} Two days late
