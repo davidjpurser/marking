@@ -65,7 +65,7 @@ $
 % ------------------------------------------------------------------------------------------
 % For question 5, give a general comment using ###
 % Choose which question by putting x at start of the exclude one
-% Need to enable the done one with # 5.1 or # 5.2
+% ATTENTION: NEED to ENABLE the DONE one by CHANGING the x to #, so either # 5.1 or # 5.2
 % Can give general comment or add comment to any or one of implementation (place after mark)
 % ------------------------------------------------------------------------------------------
 
