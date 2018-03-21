@@ -3,6 +3,7 @@ from os import listdir
 from os.path import isfile, join
 import re
 import csv
+import pdfkit
 import os
 import pypandoc
 import sys
@@ -26,7 +27,6 @@ config.read_string(sample_config)
 
 
 
-
 def outputt(line):
     # line = re.sub(r'`(.*?)`',r'<code>\1</code>', line.rstrip())
     return line
@@ -38,6 +38,7 @@ def qtotal(q, marks, avails):
 
 def append_header(lines):
     lines.append("---")
+    lines.append("fontsize: '11pt'")
     lines.append("papersize: 'a4'")
     lines.append('geometry: "left=3cm, right=3cm, top=2cm, bottom=2cm"')
     # change marking color here, see: https://en.wikibooks.org/wiki/LaTeX/Colors
@@ -55,7 +56,7 @@ if __name__ == "__main__":
     onlyfiles.sort()
     expected = 100
 
-    nolatex = len(sys.argv) > 1 and sys.argv[1] == "nolatex" 
+    nolatex = len(sys.argv) > 1 and sys.argv[1] == "nolatex"
 
     def outputm(value):
         if nolatex:
@@ -76,7 +77,7 @@ if __name__ == "__main__":
         writer.writerow(["UniID", "Mark"])
         if cropped:
             writer.writerow(["Warning", "Only some files here, rerun without limit"])
-            
+
         for f in onlyfiles:
             with open(mypath + f,"r") as g:
                 uid = f.split(".")[0]
@@ -130,11 +131,15 @@ if __name__ == "__main__":
                         m = re.search('## (.*) {(\d*)}{(\d*)}', line)
                         comment =  line[len(m.group(0)):].strip()
                         if len(comment) > 0 :
-                            # appends subquestion title and its comment, a becomes a) in bold.
-                            # needs a newline afterwards, otherwise it will all bunch up in a continuous line
-                            comments.append("**" + q + " " + m.group(1).strip() + ":**  " + comment)
-                            comments.append("\n")
+                            # For 5 no need to print out "Implementation" and such
+                            if str(q) != "5.1" and str(q) != "5.2":
+                                comments.append("**" + q + "" + m.group(1).strip() + ")**  " + comment)
+                                comments.append("\n")
+                            else:
+                                comments.append("\n"+ comment)
+
                     if line.startswith("###") and not ignore:
+                        comments.append("\n")
                         comments.append(outputt(line[3:].strip()))
 
                     if line.startswith("#P"):
@@ -151,7 +156,7 @@ if __name__ == "__main__":
                 if len(penalties) > 0:
                     count_penalties = 0
                     loss_total = 0
-                    comments.append("\n\n### Total before penalties: " +outputm( str(totalm) + "/" + str(totala) ) + "\n")
+                    comments.append("\n\n## Total Before Penalties: " +outputm( str(totalm) + "/" + str(totala) ) + "\n")
 
                     for (loss, why) in penalties:
                         comments.append("* "+ why + " [" + str(loss) + "]")
@@ -170,21 +175,22 @@ if __name__ == "__main__":
             comments_on_newlines = "\n".join([comment for comment in comments])
             print(comments_on_newlines)
 
+            if nolatex:
+                comments_on_newlines = """<html><head><style> body{font-size:0.75em;} </style></head><body>""" \
+                                        + comments_on_newlines \
+                                        + """\n</body></html>"""
+
             outfile = open('temp.md', 'w')
             outfile.write(comments_on_newlines)
             outfile.close()
 
-            output_filename =  outdir + uid[1:] 
+            output_filename =  outdir + uid[1:]
 
             if nolatex:
-                final_pdf_output = pypandoc.convert_file('temp.md', "html", outputfile=output_filename + ".pdf", extra_args=["--pdf-engine=weasyprint"])
+                final_pdf_output = pypandoc.convert_file('temp.md', "html", outputfile=output_filename + ".pdf", extra_args=["--pdf-engine=weasyprint","--highlight-style=kate"])
                 assert final_pdf_output == ""
             else:
-                final_pdf_output = pypandoc.convert_file('temp.md', "pdf", outputfile=output_filename + ".pdf")
+                final_pdf_output = pypandoc.convert_file('temp.md', "pdf", outputfile=output_filename + ".pdf", extra_args=["--highlight-style=kate"])
                 assert final_pdf_output == ""
-               
-
 
             os.remove('temp.md')
-
-
