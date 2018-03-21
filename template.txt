@@ -1,0 +1,55 @@
+% CS126 Feedback template. 
+% Start lines with # for question (number of marks is optional, feedback is optional)
+% Start lines with ## for subquestion (number of marks is required, feedback is optional)
+% Start lines with % for a code comment like this
+% Start lines with ### for feedback without a mark
+% Start lines with #P for a penalty. xP will not include the penalty
+% Start lines with x to exclude the question (see 5.2, can swap to 5.1)
+
+
+% Q1
+# 1 {}{5} CommentOnIterator
+
+% Q2
+# 2
+## a {}{5} CommentOnsetComp
+## b {}{15} CommentOnSort
+## c {}{7} CommentOnComplexity
+## d {}{3} CommentOnDemonstration
+
+% Q3
+# 3
+## a {}{4} CommentOnImplementation
+## b {}{4} CommentOnComplexity
+## c {}{2} Output is [in]correct
+## d {}{5} CommentOnExplanation
+
+% Q4
+# 4 
+## a {}{7}  
+## b {}{8} 
+
+% Give a general comment
+% Choose which question by putting x at start of the exclude one
+% Need to enable the done one with # 5.1 or # 5.2
+% Can give general comment or add comment to any or one of implementation (place after mark)
+
+x 5.1 
+##  Implementation {}{12} 
+##  Complexity {}{10}
+##  Description {}{13} 
+
+x 5.2 
+##  Implementation {}{15}
+##  Complexity {}{10}
+##  Description {}{10}
+
+
+% Enable penalty by changing to #P
+xP {-5} Bad directory structure
+xP {-5} Bad documentation
+xP {-5} One day late
+xP {-10} Two days late
+
+
+
