@@ -26,8 +26,6 @@ config = configparser.RawConfigParser(allow_no_value=True)
 config.read_string(sample_config)
 
 
-def outputm(value):
-    return '<span style="color:red">[' + value + "]</span>"
 
 
 def outputt(line):
