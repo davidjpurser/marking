@@ -68,8 +68,9 @@ $
 ### `System.out.println("Hello World");`{.java}
 ### `for(int j = 0; i < 1000; i++)`{.java}
 ### >`j += j;`{.java}
-### `while(True)`{.java}
-### >`i *= 2;`{.java}
+### `while(true != false || false != true)`{.java}
+### >`if(true && !false)`{.java}
+### >>`i *= 2;`{.java}
 
 
 % ------------------------------------------------------------------------------------------
