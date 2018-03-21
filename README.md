@@ -25,5 +25,5 @@ The results.csv will contain a warning that it is partial. Recompile without no 
 * Pandoc
 * pypandoc
 * Either:
-** pdflatex
-** weasyprint
+	* pdflatex
+	* weasyprint
