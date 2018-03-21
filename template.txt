@@ -1,14 +1,44 @@
-% CS126 Feedback template. 
-% Start lines with # for question (number of marks is optional, feedback is optional)
-% Start lines with ## for subquestion (number of marks is required, feedback is optional)
-% Start lines with % for a code comment like this
-% Start lines with ### for feedback without a mark
-% Start lines with #P for a penalty. xP will not include the penalty
-% Start lines with x to exclude the question (see 5.2, can swap to 5.1)
-
+% ------------------------------------------------------------------------------------------
+%   CS126 Feedback Template
+% ------------------------------------------------------------------------------------------
+%
+% - Start lines with # for question (number of marks is optional, feedback is optional)
+%
+% - Start lines with ## for subquestion (number of marks is required, feedback is optional)
+%
+% - Start lines with % for a code comment like this
+%
+% - Start lines with ### for feedback without a mark
+%   For example:
+%       ### This is wrong.
+%
+% - For java syntax inside use `Insert code here`.{java}.
+% - Note this only works on a single line.
+%   An example of this:
+%       ### See this code: `String str = "Hello World!";`.{java}
+%
+% - For indentation inside ### use '>'
+%   An example of this:
+%       ### No indentation
+%       ### > One indentation
+%       ### >> Two indentation
+%       ### >>> Three indentation
+%
+% - With that you can build a multi-line code block like so:
+%       ### `for(int j = 0; i < 1000; i++)`{.java}
+%       ### > `j += j;`{.java}.
+$
+% - Start lines with #P for a penalty. xP will not include the penalty
+%   For example, the line below will deduct 42 points (note only integers are allowed):
+%       #P {-42} This code hurts my eyes.
+%
+%  -Start lines with x to exclude the question (see 5.2, can swap to 5.1)
+%
+% ------------------------------------------------------------------------------------------
 
 % Q1
 # 1 {}{5} CommentOnIterator
+
 
 % Q2
 # 2
@@ -17,6 +47,7 @@
 ## c {}{7} CommentOnComplexity
 ## d {}{3} CommentOnDemonstration
 
+
 % Q3
 # 3
 ## a {}{4} CommentOnImplementation
@@ -24,32 +55,38 @@
 ## c {}{2} Output is [in]correct
 ## d {}{5} CommentOnExplanation
 
-% Q4
-# 4 
-## a {}{7}  
-## b {}{8} 
 
-% Give a general comment
+% Q4
+# 4
+## a {}{7}
+## b {}{8}
+
+
+% ------------------------------------------------------------------------------------------
+% For question 5, give a general comment using ###
 % Choose which question by putting x at start of the exclude one
 % Need to enable the done one with # 5.1 or # 5.2
 % Can give general comment or add comment to any or one of implementation (place after mark)
+% ------------------------------------------------------------------------------------------
 
-x 5.1 
-##  Implementation {}{12} 
+x 5.1
+##  Implementation {}{12}
 ##  Complexity {}{10}
-##  Description {}{13} 
+##  Description {}{13}
 
-x 5.2 
+x 5.2
 ##  Implementation {}{15}
 ##  Complexity {}{10}
 ##  Description {}{10}
 
 
+% ------------------------------------------------------------------------------------------
 % Enable penalty by changing to #P
+% Only integers allowed
+$ Change description if required
+% ------------------------------------------------------------------------------------------
+
 xP {-5} Bad directory structure
 xP {-5} Bad documentation
 xP {-5} One day late
 xP {-10} Two days late
-
-
-
