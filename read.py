@@ -3,7 +3,6 @@ from os import listdir
 from os.path import isfile, join
 import re
 import csv
-import pdfkit
 import os
 import pypandoc
 import sys
