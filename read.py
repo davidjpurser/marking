@@ -133,7 +133,7 @@ if __name__ == "__main__":
                         if len(comment) > 0 :
                             # appends subquestion title and its comment, a becomes a) in bold.
                             # needs a newline afterwards, otherwise it will all bunch up in a continuous line
-                            comments.append("**"+ m.group(1).strip() + "**  " + comment)
+                            comments.append("**" + q + " " + m.group(1).strip() + ":**  " + comment)
                             comments.append("\n")
                     if line.startswith("###") and not ignore:
                         comments.append(outputt(line[3:].strip()))
