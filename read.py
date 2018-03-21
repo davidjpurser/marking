@@ -60,6 +60,12 @@ if __name__ == "__main__":
 
     nolatex = len(sys.argv) > 1 and sys.argv[1] == "nolatex" 
 
+    def outputm(value):
+        if nolatex:
+            return '<span style="color:red">[' + value + "]</span>"
+        else:
+            return '[[' + value + ']](#x)'
+
 
     cropped = len(sys.argv) > (2 if nolatex else 1)
     if cropped:
