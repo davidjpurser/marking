@@ -131,12 +131,9 @@ if __name__ == "__main__":
                         m = re.search('## (.*) {(\d*)}{(\d*)}', line)
                         comment =  line[len(m.group(0)):].strip()
                         if len(comment) > 0 :
-                            # For 5 bullet point and boldening for "Implementation" and such
-                            if str(q) != "5.1" and str(q) != "5.2":
-                                comments.append("**" + q + "" + m.group(1).strip() + ")**  " + comment)
-                                comments.append("\n")
-                            else:
-                                comments.append("\n"+ "* **" + m.group(1).strip() + "** - " + comment)
+                            comments.append("\n")
+                            comments.append("**" + q + " " + m.group(1).strip() + ":**  " + comment)
+                            comments.append("\n")
 
                     if line.startswith("###") and not ignore:
                         comments.append("\n")
@@ -146,7 +143,7 @@ if __name__ == "__main__":
                         m = re.search('#P {(-\d*)}', line)
                         penalties.append((int(m.group(1)),line[len(m.group(0)):].strip() ))
 
-                # Inserts the final question title total, either 5.1 or 5.2
+                # Inserts the final question title and its total
                 comments[current_title_location] = append_question_title(q, marks[q], avails[q])
                 totalm = sum([marks[a] for a in marks])
                 totala = sum([avails[a] for a in avails])
