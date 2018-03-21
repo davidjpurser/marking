@@ -131,12 +131,12 @@ if __name__ == "__main__":
                         m = re.search('## (.*) {(\d*)}{(\d*)}', line)
                         comment =  line[len(m.group(0)):].strip()
                         if len(comment) > 0 :
-                            # For 5 no need to print out "Implementation" and such
+                            # For 5 bullet point and boldening for "Implementation" and such
                             if str(q) != "5.1" and str(q) != "5.2":
                                 comments.append("**" + q + "" + m.group(1).strip() + ")**  " + comment)
                                 comments.append("\n")
                             else:
-                                comments.append("\n"+ comment)
+                                comments.append("\n"+ "* **" + m.group(1).strip() + "** - " + comment)
 
                     if line.startswith("###") and not ignore:
                         comments.append("\n")
