@@ -148,7 +148,7 @@ if __name__ == "__main__":
                 if len(penalties) > 0:
                     count_penalties = 0
                     loss_total = 0
-                    comments.append("### Total before penalties: " +outputm( str(totalm) + "/" + str(totala) ) + "\n")
+                    comments.append("\n\n### Total before penalties: " +outputm( str(totalm) + "/" + str(totala) ) + "\n")
 
                     for (loss, why) in penalties:
                         comments.append("* "+ why + " [" + str(loss) + "]")
