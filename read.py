@@ -122,7 +122,7 @@ if __name__ == "__main__":
                         mark = m.group(1)
                         if mark == "":
                             mark = "0"
-                            comments.append("##" + outputm("warning, empty treated as zero"))
+                            comments.append("## " + outputm("warning, empty treated as zero"))
                         marks[q] += int(mark)
                         avail = m.group(2)
                         avails[q] += int(avail)
