@@ -157,12 +157,12 @@ if __name__ == "__main__":
                     comments.append("\n\n## Total Before Penalties: " +outputm( str(totalm) + "/" + str(totala) ) + "\n")
 
                     for (loss, why) in penalties:
-                        comments.append("* "+ why + " [" + str(loss) + "]")
+                        comments.append("* "+ why + " " + outputm(str(loss)));
                         count_penalties += 1
                         loss_total += loss
                         totalm += loss
                     # insert penalty title line before the list of penalties
-                    comments.insert(len(comments) - count_penalties, "\n## Penalties: " + "" +outputm( str(loss_total) ) + "")
+                    comments.insert(len(comments) - count_penalties, "\n## Penalties: " + "" +outputm( str(loss_total)) + "")
 
 
                 comments.append("\n## Grand Total: " + "" +outputm( str(totalm) + "/" + str(totala) ) + "")
