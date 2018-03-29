@@ -47,7 +47,7 @@ def append_header(lines):
 
 
 def append_question_title(question, total, max_avail):
-    return "\n## " + config.get("questions", "QN") +" " + question +" - " + config.get("questions", "Q" + question) + " " +outputm( str(total) + "/" + str(max_avail) ) + ""
+    return "\n## " + config.get("questions", "QN") +" " + question + (" - " + config.get("questions", "Q" + question) if config.has_option("questions", "Q" + question) else "") + " " +outputm( str(total) + "/" + str(max_avail) ) + ""
 
 if __name__ == "__main__":
     mypath = "return/"
