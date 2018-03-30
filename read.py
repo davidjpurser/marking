@@ -76,7 +76,6 @@ if __name__ == "__main__":
         outputfiles = onlyfiles
 
     print(outputfiles)
-    exit()
 
     if os.path.isfile('results.csv'):
         os.remove('results.csv')
