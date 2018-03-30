@@ -67,7 +67,9 @@ if __name__ == "__main__":
 
     cropped = len(sys.argv) > (2 if nolatex else 1)
     if cropped:
-        onlyfiles = onlyfiles[-int(sys.argv[(2 if nolatex else 1)]):]
+        outputfiles = onlyfiles[-int(sys.argv[(2 if nolatex else 1)]):]
+    else:
+        outputfiles = onlyfiles
 
     if os.path.isfile('results.csv'):
         os.remove('results.csv')
@@ -75,9 +77,8 @@ if __name__ == "__main__":
     with open('results.csv', 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(["UniID", "Mark"])
-        if cropped:
-            writer.writerow(["Warning", "Only some files here, rerun without limit"])
 
+        allMarks = []
         for f in onlyfiles:
             with open(mypath + f,"r") as g:
                 uid = f.split(".")[0]
@@ -90,6 +91,9 @@ if __name__ == "__main__":
                 current_title_location = -1
                 ignore = False
 
+                currentStudent = {}
+                currentStudent["id"] = uid[1:]
+                allMarks.append(currentStudent)
                 append_header(comments)
                 comments.append("# " + config.get("questions","module") + " Assignment Feedback - " + str(uid[1:]))
 
@@ -117,6 +121,20 @@ if __name__ == "__main__":
                         if len(comment) >0 :
                             comments.append(outputt(comment))
 
+                        subpart = ""
+
+                   
+
+                    if line.startswith("## ") and not ignore:
+                        m = re.search('## (.*) {(\d*)}{(\d*)}', line)
+                        comment =  line[len(m.group(0)):].strip()
+                        subpart = m.group(1).strip()
+                        if len(comment) > 0 :
+                            comments.append("\n")
+                            comments.append("**" + q + " " + m.group(1).strip() + ":**  " + comment)
+                            comments.append("\n")
+
+
                     m = re.search('{(\d*)}{(\d*)}', line)
                     if m != None and not ignore:
                         mark = m.group(1)
@@ -127,14 +145,7 @@ if __name__ == "__main__":
                         avail = m.group(2)
                         avails[q] += int(avail)
                         assert(int(mark) <= int (avail))
-
-                    if line.startswith("## ") and not ignore:
-                        m = re.search('## (.*) {(\d*)}{(\d*)}', line)
-                        comment =  line[len(m.group(0)):].strip()
-                        if len(comment) > 0 :
-                            comments.append("\n")
-                            comments.append("**" + q + " " + m.group(1).strip() + ":**  " + comment)
-                            comments.append("\n")
+                        currentStudent[q + " " + subpart] = int(mark)
 
                     if line.startswith("###") and not ignore:
                         comments.append("\n")
@@ -170,25 +181,39 @@ if __name__ == "__main__":
             writer.writerow([uid[1:], totalm])
             print("------------------Current ID: {} with {} marks------------------".format(uid[1:], totalm))
             #print(marks)
-            comments_on_newlines = "\n".join([comment for comment in comments])
-            print(comments_on_newlines)
 
-            if nolatex:
-                comments_on_newlines = """<html><head><style> body{font-size:0.75em;} </style></head><body>""" \
-                                        + comments_on_newlines \
-                                        + """\n</body></html>"""
+            if f in outputfiles:
+                comments_on_newlines = "\n".join([comment for comment in comments])
+                print(comments_on_newlines)
 
-            outfile = open('temp.md', 'w')
-            outfile.write(comments_on_newlines)
-            outfile.close()
+                if nolatex:
+                    comments_on_newlines = """<html><head><style> body{font-size:0.75em;} </style></head><body>""" \
+                                            + comments_on_newlines \
+                                            + """\n</body></html>"""
 
-            output_filename =  outdir + uid[1:]
+                outfile = open('temp.md', 'w')
+                outfile.write(comments_on_newlines)
+                outfile.close()
 
-            if nolatex:
-                final_pdf_output = pypandoc.convert_file('temp.md', "html", outputfile=output_filename + ".pdf", extra_args=["--pdf-engine=weasyprint","--highlight-style=kate"])
-                assert final_pdf_output == ""
-            else:
-                final_pdf_output = pypandoc.convert_file('temp.md', "pdf", outputfile=output_filename + ".pdf", extra_args=["--highlight-style=kate"])
-                assert final_pdf_output == ""
+                output_filename =  outdir + uid[1:]
 
-            os.remove('temp.md')
+                if nolatex:
+                    final_pdf_output = pypandoc.convert_file('temp.md', "html", outputfile=output_filename + ".pdf", extra_args=["--pdf-engine=weasyprint","--highlight-style=kate"])
+                    assert final_pdf_output == ""
+                else:
+                    final_pdf_output = pypandoc.convert_file('temp.md', "pdf", outputfile=output_filename + ".pdf", extra_args=["--highlight-style=kate"])
+                    assert final_pdf_output == ""
+
+                os.remove('temp.md')
+
+        allQs = []
+        for x in allMarks:
+            for y in x:
+                if y not in allQs:
+                    allQs.append(y)
+        allQs = list(allQs)
+        with open('breakdown.csv', 'w') as csvfile:
+                writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                writer.writerow(allQs)
+                for x in allMarks:
+                    writer.writerow([(x[y] if y in x else "-") for y in allQs])
