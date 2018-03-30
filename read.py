@@ -65,11 +65,18 @@ if __name__ == "__main__":
             return '[[' + value + ']](#x)'
 
 
-    cropped = len(sys.argv) > (2 if nolatex else 1)
+    croparg =  (2 if nolatex else 1)
+    cropped = len(sys.argv) > croparg
     if cropped:
-        outputfiles = onlyfiles[-int(sys.argv[(2 if nolatex else 1)]):]
+        if sys.argv[croparg] == "0":
+            outputfiles = []
+        else:
+            outputfiles = onlyfiles[-int(sys.argv[croparg]):]
     else:
         outputfiles = onlyfiles
+
+    print(outputfiles)
+    exit()
 
     if os.path.isfile('results.csv'):
         os.remove('results.csv')
