@@ -159,7 +159,7 @@ if __name__ == "__main__":
                         comments.append(outputt(line[3:].strip()))
 
                     if line.startswith("#P"):
-                        m = re.search('#P {(-\d*)}', line)
+                        m = re.search('#P {(-?\d*)}', line)
                         penalties.append((int(m.group(1)),line[len(m.group(0)):].strip() ))
 
                 # Inserts the final question title and its total
