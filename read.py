@@ -178,10 +178,12 @@ if __name__ == "__main__":
                         count_penalties += 1
                         loss_total += loss
                         totalm += loss
+
+                    currentStudent["P"] = loss_total
                     # insert penalty title line before the list of penalties
                     comments.insert(len(comments) - count_penalties, "\n## Penalties: " + "" +outputm( str(loss_total)) + "")
 
-
+                currentStudent["Total"] = totalm
                 comments.append("\n## Grand Total: " + "" +outputm( str(totalm) + "/" + str(totala) ) + "")
 
             writer.writerow([uid[1:], totalm])
@@ -218,6 +220,7 @@ if __name__ == "__main__":
                 if y not in allQs:
                     allQs.append(y)
         allQs = list(allQs)
+        allQs.sort()
         with open('breakdown.csv', 'w') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 writer.writerow(allQs)
