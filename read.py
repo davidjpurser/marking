@@ -7,7 +7,7 @@ import pdfkit
 import os
 import pypandoc
 import sys
-
+import platform
 import configparser
 import io
 
@@ -99,6 +99,7 @@ if __name__ == "__main__":
 
                 currentStudent = {}
                 currentStudent["id"] = uid[1:]
+                currentStudent["marker"] = platform.node()
                 allMarks.append(currentStudent)
                 append_header(comments)
                 comments.append("# " + config.get("questions","module") + " Assignment Feedback - " + str(uid[1:]))
