@@ -136,9 +136,11 @@ if __name__ == "__main__":
                         m = re.search('## (.*) {(\d*)}{(\d*)}', line)
                         comment =  line[len(m.group(0)):].strip()
                         subpart = m.group(1).strip()
+                        if subpart.startswith("4"):
+                             subpart= subpart[1:]
                         if len(comment) > 0 :
                             comments.append("\n")
-                            comments.append("**" + q + " " + m.group(1).strip() + ":**  " + comment)
+                            comments.append("**" + q + " " + subpart + ":**  " + comment)
                             comments.append("\n")
 
 
