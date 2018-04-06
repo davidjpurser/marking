@@ -3,7 +3,6 @@ from os import listdir
 from os.path import isfile, join
 import re
 import csv
-import pdfkit
 import os
 import pypandoc
 import sys
@@ -86,6 +85,18 @@ if __name__ == "__main__":
 
         allMarks = []
         for f in onlyfiles:
+
+            b4space = False
+            spaceNotConsidered = re.compile(r'#P {-2} Space not considered in 4b.')
+            with open(mypath + f,"r") as g:     
+                
+
+                for line in g:
+                     match = spaceNotConsidered.search(line)
+                     if match != None :
+                          b4space = True
+                          print("MATCH")
+
             with open(mypath + f,"r") as g:
                 uid = f.split(".")[0]
                 q = -1
@@ -130,16 +141,22 @@ if __name__ == "__main__":
 
                         subpart = ""
 
-                   
+                    markdownnow = False
 
                     if line.startswith("## ") and not ignore:
                         m = re.search('## (.*) {(\d*)}{(\d*)}', line)
                         comment =  line[len(m.group(0)):].strip()
                         subpart = m.group(1).strip()
+                        if subpart.startswith("4"):
+                             subpart= subpart[1:]
                         if len(comment) > 0 :
                             comments.append("\n")
-                            comments.append("**" + q + " " + m.group(1).strip() + ":**  " + comment)
+                            comments.append("**" + q + " " + subpart + ":**  " + comment)
                             comments.append("\n")
+                        if q =="4" and subpart == "b" and b4space:
+                            print("HERE------" , q == "4", subpart, b4space)
+                            comments.append("Space not considered")
+                            markdownnow = True
 
 
                     m = re.search('{(\d*)}{(\d*)}', line)
@@ -149,10 +166,16 @@ if __name__ == "__main__":
                             mark = "0"
                             comments.append("## " + outputm("warning, empty treated as zero"))
                         marks[q] += int(mark)
+                        
                         avail = m.group(2)
                         avails[q] += int(avail)
                         assert(int(mark) <= int (avail))
                         currentStudent[q + " " + subpart] = int(mark)
+
+                        if markdownnow:
+                            marks[q] -= 2
+                            currentStudent[q + " " + subpart] -=2
+                            markdownnow = False
 
                     if line.startswith("###") and not ignore:
                         comments.append("\n")
@@ -160,7 +183,9 @@ if __name__ == "__main__":
 
                     if line.startswith("#P"):
                         m = re.search('#P {(-?\d*)}', line)
-                        penalties.append((int(m.group(1)),line[len(m.group(0)):].strip() ))
+                        match = spaceNotConsidered.search(line)
+                        if match == None :
+                            penalties.append((int(m.group(1)),line[len(m.group(0)):].strip() ))
 
                 # Inserts the final question title and its total
                 comments[current_title_location] = append_question_title(q, marks[q], avails[q])
